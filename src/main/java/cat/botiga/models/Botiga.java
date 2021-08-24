@@ -90,6 +90,8 @@ public class Botiga {
 		this.capacity = capacity;
 	}
 
+	
+
 	/*
 	 * Relacio un a un
 	 * 
@@ -105,5 +107,10 @@ public class Botiga {
 	 */
 
 	// to String
-
+	
+	@Override
+	public String toString() {
+		return "Botiga [id=" + id + ", name=" + name + ", capacity=" + capacity + ", quadres=" + quadres + "]";
+	}
+	
 }
