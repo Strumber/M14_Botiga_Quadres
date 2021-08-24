@@ -1,4 +1,4 @@
-package cat.botiga.models;
+package cat.botiga.main.models;
 
 import java.util.Date;
 

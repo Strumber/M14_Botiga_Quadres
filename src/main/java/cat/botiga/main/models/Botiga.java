@@ -1,4 +1,4 @@
-package cat.botiga.models;
+package cat.botiga.main.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,26 +31,50 @@ public class Botiga {
 	public Botiga() {
 	}
 
-	// Constrintor amb parametres sense id que es autonumèric
+	// Constrictor amb parametres sense id que es autonumèric
 
 	public Botiga(String name, int capacity) {
 		this.name = name;
 		this.capacity = capacity;
 	}
+	
+	// Getters & Setters
+		public long getId() {
+			return id;
+		}
 
-	// Camps per guardar varis quadres, Relacio One to Many i afegir els permisos en
+		public void setId(long id) {
+			this.id = id;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public int getCapacity() {
+			return capacity;
+		}
+
+		public void setCapacity(int capacity) {
+			this.capacity = capacity;
+		}
+
+	/* Camps per guardar varis quadres, Relacio One to Many i afegir els permisos en
 	// cascada
-	@OneToMany(mappedBy = "quadre", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH })
-	private List<Quadre> quadres;
+	@OneToMany(mappedBy = "quadre", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,CascadeType.REFRESH })
+	private List<Quadre> quadre;
 
 	// metode per afegir quadres
 	public void afegirQuadres(Quadre elQuadre) {
 		// si quadres esta buit, crea l' array list
-		if (quadres == null)
-			quadres = new ArrayList<>();
+		if (quadre == null)
+			quadre = new ArrayList<>();
 		// afegim quadre
-		quadres.add(elQuadre);
+		quadre.add(elQuadre);
 		// afegir el quadre a la botiga corresponent
 		elQuadre.setBotiga(this);
 	}
@@ -58,37 +82,14 @@ public class Botiga {
 	// Getter & Setter de quadres
 
 	public List<Quadre> getQuadres() {
-		return quadres;
+		return quadre;
 	}
 
-	public void setQuadres(List<Quadre> quadres) {
-		this.quadres = quadres;
-	}
+	public void setQuadres(List<Quadre> quadre) {
+		this.quadre = quadre;
+	}*/
 
-	// Getters & Setters
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getCapacity() {
-		return capacity;
-	}
-
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
-	}
+	
 
 	
 
@@ -110,7 +111,7 @@ public class Botiga {
 	
 	@Override
 	public String toString() {
-		return "Botiga [id=" + id + ", name=" + name + ", capacity=" + capacity + ", quadres=" + quadres + "]";
+		return "Botiga [id=" + id + ", name=" + name + ", capacity=" + capacity + "]";
 	}
 	
 }

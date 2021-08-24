@@ -1,17 +1,22 @@
-package cat.botiga.rest;
+package cat.botiga.main.rest;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cat.botiga.models.Botiga;
+import cat.botiga.main.models.Botiga;
 
-@RestController
-@RequestMapping ("/shops")
+@RestController			//Indica que aquesta clase sera un servei REST
+@RequestMapping ("/")	//URL on s' exposa els serveis d' aquesta clase
 public class ControllerRest {
 	
-	@GetMapping
+	@GetMapping("hello")
+	public String hello() {
+		return "hello world";
+	}
+	
+	/*@GetMapping ("")
 	public ResponseEntity<Botiga> getBotiga(){
 		Botiga botiga = new Botiga();
 		botiga.setId(1);
@@ -19,9 +24,8 @@ public class ControllerRest {
 		botiga.setCapacity(10);
 		
 		return ResponseEntity.ok(botiga);
-	}
-	/*public String hello() {
-		return "hello world";
 	}*/
+
+	
 
 }
