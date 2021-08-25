@@ -11,12 +11,12 @@ import cat.botiga.main.models.Botiga;
 @RequestMapping ("/")	//URL on s' exposa els serveis d' aquesta clase
 public class ControllerRest {
 	
-	@GetMapping("hello")
+	/*@GetMapping("hello")
 	public String hello() {
 		return "hello world";
-	}
+	}*/
 	
-	/*@GetMapping ("")
+	@GetMapping ("/shops")
 	public ResponseEntity<Botiga> getBotiga(){
 		Botiga botiga = new Botiga();
 		botiga.setId(1);
@@ -24,7 +24,7 @@ public class ControllerRest {
 		botiga.setCapacity(10);
 		
 		return ResponseEntity.ok(botiga);
-	}*/
+	}
 
 	
 
