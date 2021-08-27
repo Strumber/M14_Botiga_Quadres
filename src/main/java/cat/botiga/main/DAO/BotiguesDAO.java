@@ -6,6 +6,8 @@ import cat.botiga.main.models.Botiga;
 
 
 
-public interface BotiguesDAO extends JpaRepository<Botiga, Long> {
+public interface BotiguesDAO extends JpaRepository<Botiga, Integer> {
+	
+	
 
 }

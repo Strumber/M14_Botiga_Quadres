@@ -13,13 +13,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "botigues")
+@Table(name = "botiga")
 public class Botiga {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Genera camps clau
 	@Column(name = "id")
-	private long id;
+	private int id;
 
 	@Column(name = "name", nullable = false, length = 30)
 	private String name;
@@ -31,7 +31,7 @@ public class Botiga {
 	public Botiga() {
 	}
 
-	// Constrictor amb parametres sense id que es autonumèric
+	// Constructor amb parametres sense id que es autonumèric
 
 	public Botiga(String name, int capacity) {
 		this.name = name;
@@ -39,11 +39,11 @@ public class Botiga {
 	}
 	
 	// Getters & Setters
-		public long getId() {
+		public int getId() {
 			return id;
 		}
 
-		public void setId(long id) {
+		public void setId(int id) {
 			this.id = id;
 		}
 
@@ -62,56 +62,37 @@ public class Botiga {
 		public void setCapacity(int capacity) {
 			this.capacity = capacity;
 		}
+		
+		 @OneToMany(mappedBy = "botiga",cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+		 private List<Quadre> quadres;
+		 
+		 //Per poder afegir quadres
+		 
+		 public void afegirQuadre (Quadre elQuadre) {
+			 
+			 if (quadres == null) quadres = new ArrayList<>();
+			 
+			 quadres.add(elQuadre);
+			 
+			 elQuadre.setBotiga(this);
+		 }
+		 
+		 //Get and Set
+		 public List<Quadre> getQuadres() {
+				return quadres;
+			}
 
-	/* Camps per guardar varis quadres, Relacio One to Many i afegir els permisos en
-	// cascada
-	@OneToMany(mappedBy = "quadre", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,CascadeType.REFRESH })
-	private List<Quadre> quadre;
+			public void setQuadres(List<Quadre> quadres) {
+				this.quadres = quadres;
+			}
+		 
 
-	// metode per afegir quadres
-	public void afegirQuadres(Quadre elQuadre) {
-		// si quadres esta buit, crea l' array list
-		if (quadre == null)
-			quadre = new ArrayList<>();
-		// afegim quadre
-		quadre.add(elQuadre);
-		// afegir el quadre a la botiga corresponent
-		elQuadre.setBotiga(this);
-	}
-
-	// Getter & Setter de quadres
-
-	public List<Quadre> getQuadres() {
-		return quadre;
-	}
-
-	public void setQuadres(List<Quadre> quadre) {
-		this.quadre = quadre;
-	}*/
-
-	
-
-	
-
-	/*
-	 * Relacio un a un
-	 * 
-	 * @OneToOne(cascade = CascadeType.ALL)
-	 * 
-	 * @JoinColumn(name = "id") private Quadre quadre;
-	 * 
-	 * // Getter & Setter Quadre
-	 * 
-	 * public Quadre getQuadre() { return quadre; }
-	 * 
-	 * public void setQuadre(Quadre quadre) { this.quadre = quadre; }
-	 */
-
-	// to String
 	
 	@Override
 	public String toString() {
 		return "Botiga [id=" + id + ", name=" + name + ", capacity=" + capacity + "]";
 	}
+
+	
 	
 }

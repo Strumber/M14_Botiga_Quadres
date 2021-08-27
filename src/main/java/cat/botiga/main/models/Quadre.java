@@ -1,27 +1,16 @@
 package cat.botiga.main.models;
 
 import java.util.Date;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-
+import javax.persistence.*;
 
 @Entity
-@Table(name = "quadres")
+@Table(name = "quadre")
 public class Quadre {
 
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private int id;
 
 	@Column(name = "autor", nullable = false, length = 30)
 	private String autor;
@@ -29,33 +18,35 @@ public class Quadre {
 	@Column(name = "titol", nullable = false, length = 30)
 	private String titol;
 
+	@Column(name = "preu")
 	private Double preu;
 
+	@Column(name = "data")
 	private Date data;
 
 	// Cascade, tots els tipus menys el REMOVE (Eliminar)per a que no puguis
 	// eliminar registres del "pare"
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-	@JoinColumn(name = "botiga_id")
+	@JoinColumn(name = "Botiga_id")
 	private Botiga botiga;
-	
-	//Constructor per defecte
+
+	// Constructor per defecte
 	public Quadre() {
+
 	}
 
-			// Constructors de tipus data , o Gragorian Calendar ?????
+	// Constructors de tipus data , o Gragorian Calendar ?????
 	public Quadre(Date data) {
 		this.data = data;
 	}
 
-
-
 	// Getters & Setters (tots menys DATA)
-	public long getId() {
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -90,15 +81,10 @@ public class Quadre {
 	public void setBotiga(Botiga botiga) {
 		this.botiga = botiga;
 	}
-	
+
 	// To String Tots el camps menys botiga
 	@Override
 	public String toString() {
 		return "Quadre [id=" + id + ", autor=" + autor + ", titol=" + titol + ", preu=" + preu + ", data=" + data + "]";
 	}
-
-	
-	
-	
 }
-
