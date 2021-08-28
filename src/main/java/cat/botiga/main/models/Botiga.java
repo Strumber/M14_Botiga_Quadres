@@ -63,7 +63,7 @@ public class Botiga {
 			this.capacity = capacity;
 		}
 		
-		 @OneToMany(mappedBy = "botiga",cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+		/* @OneToMany(mappedBy = "botiga",cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 		 private List<Quadre> quadres;
 		 
 		 //Per poder afegir quadres
@@ -84,13 +84,18 @@ public class Botiga {
 
 			public void setQuadres(List<Quadre> quadres) {
 				this.quadres = quadres;
-			}
+			}*/
 		 
 
 	
 	@Override
 	public String toString() {
 		return "Botiga [id=" + id + ", name=" + name + ", capacity=" + capacity + "]";
+	}
+
+	public boolean isPresent() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	
