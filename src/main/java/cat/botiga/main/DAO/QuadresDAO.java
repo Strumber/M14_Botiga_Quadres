@@ -1,17 +1,17 @@
 package cat.botiga.main.DAO;
 
-import java.util.List;
+import java.util.Iterator;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import cat.botiga.main.models.Botiga;
 import cat.botiga.main.models.Quadre;
 
 
 
-public interface QuadresDAO extends JpaRepository<Quadre, Integer> {
+public interface QuadresDAO extends JpaRepository<Quadre, Long> {
+
+	//Iterator<Quadre> iterator();
 	
-	List <Quadre> findByBotigaId (int Botiga_id);
+	/*List <Quadre> getQuadresByBotiga_Id (int botiga_id);
 	List <Quadre> findByTitolContaining(String titol);
 	
 	

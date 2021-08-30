@@ -1,5 +1,6 @@
 package cat.botiga.main.models;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -8,10 +9,10 @@ import javax.persistence.*;
 public class Quadre {
 
 	@Id
-	@Column(name = "id")
+	//@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-
+	private Long id;
+	
 	@Column(name = "autor", nullable = false, length = 30)
 	private String autor;
 
@@ -22,31 +23,39 @@ public class Quadre {
 	private Double preu;
 
 	@Column(name = "data")
-	private Date data;
+	private LocalDateTime data;
+	
+	
+	
 
-	// Cascade, tots els tipus menys el REMOVE (Eliminar)per a que no puguis
+	/* Cascade, tots els tipus menys el REMOVE (Eliminar)per a que no puguis
 	// eliminar registres del "pare"
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "Botiga_id")
-	private Botiga botiga;
+	private Botiga botiga;*/
 
 	// Constructor per defecte
 	public Quadre() {
 
 	}
 
-	// Constructors de tipus data , o Gragorian Calendar ?????
-	public Quadre(Date data) {
-		this.data = data;
+	
+
+	// Getters & Setters (tots menys data)
+
+	public Quadre(String autor, String titol, Double preu) {
+		this.autor = autor;
+		this.titol = titol;
+		this.preu = preu;
 	}
 
-	// Getters & Setters (tots menys DATA)
 
-	public int getId() {
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -73,8 +82,24 @@ public class Quadre {
 	public void setPreu(Double preu) {
 		this.preu = preu;
 	}
+	
+	
+	public LocalDateTime getData() {
+		return data;
+	}
 
-	public Botiga getBotiga() {
+	
+	public void setData(LocalDateTime localDateTime) {
+		this.data = localDateTime;
+	}
+	
+	@Override
+	public String toString() {
+		return "Quadre [id=" + id + ", autor=" + autor + ", titol=" + titol + ", preu=" + preu + ", data=" + data + "]";
+	}
+	
+
+	/*public Botiga getBotiga() {
 		return botiga;
 	}
 
@@ -82,9 +107,14 @@ public class Quadre {
 		this.botiga = botiga;
 	}
 
-	// To String Tots el camps menys botiga
-	@Override
-	public String toString() {
-		return "Quadre [id=" + id + ", autor=" + autor + ", titol=" + titol + ", preu=" + preu + ", data=" + data + "]";
+	public int getBotiga_id() {
+		return botiga_id;
 	}
+
+	public void setBotiga_id(int botiga_id) {
+		this.botiga_id = botiga_id;
+	}*/
+
+	// To String Tots el camps menys botiga
+	
 }

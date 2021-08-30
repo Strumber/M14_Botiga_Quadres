@@ -6,9 +6,11 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,13 +21,19 @@ public class Botiga {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Genera camps clau
 	@Column(name = "id")
-	private int id;
+	private Long id;
 
 	@Column(name = "name", nullable = false, length = 30)
 	private String name;
 
 	@Column(name = "capacity")
 	private int capacity;
+	
+	//@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY,  cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+			CascadeType.REFRESH })
+	@JoinColumn(name="botiga_id")
+	private List <Quadre> quadres;
 
 	// Constructors per defecte
 	public Botiga() {
@@ -33,17 +41,18 @@ public class Botiga {
 
 	// Constructor amb parametres sense id que es autonumèric
 
-	public Botiga(String name, int capacity) {
+	public Botiga(Long id,String name, int capacity) {
+		this.id=id;
 		this.name = name;
 		this.capacity = capacity;
 	}
 	
 	// Getters & Setters
-		public int getId() {
+		public Long getId() {
 			return id;
 		}
 
-		public void setId(int id) {
+		public void setId(Long id) {
 			this.id = id;
 		}
 
@@ -63,7 +72,23 @@ public class Botiga {
 			this.capacity = capacity;
 		}
 		
-		/* @OneToMany(mappedBy = "botiga",cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+		
+		public List<Quadre> getQuadres() {
+			return this.quadres;
+			
+			
+		}
+		
+		public void addQuadre (Quadre quadre) {
+			
+			this.quadres.add(quadre);
+		}
+		
+		public void eliminaQuadres (Long botiga_id) {
+			//this.quadres.clear();
+			this.quadres.clear();
+		}
+		 /*@OneToMany(mappedBy = "botiga",cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 		 private List<Quadre> quadres;
 		 
 		 //Per poder afegir quadres
@@ -93,10 +118,7 @@ public class Botiga {
 		return "Botiga [id=" + id + ", name=" + name + ", capacity=" + capacity + "]";
 	}
 
-	public boolean isPresent() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	
 	

@@ -24,15 +24,8 @@ CREATE TABLE QUADRE (
 	constraint botiga_id
 	FOREIGN KEY(botiga_id)
 	references BOTIGA(id)
-	on delete no action on update no action)
+	)
+	
 	ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-	/*id integer auto_increment,autor varchar(25),titol varchar(25),
-	preu double,data DATE,botiga_id integer,
-	primary key(id),
-	FOREIGN KEY (botiga_id) REFERENCES botiga(id)
-	)
-	ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;*/
-	
-	
-
+	/*on delete no action on update no action)*/

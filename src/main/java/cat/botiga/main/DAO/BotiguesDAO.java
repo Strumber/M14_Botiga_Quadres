@@ -1,18 +1,25 @@
 package cat.botiga.main.DAO;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+
 
 import cat.botiga.main.models.Botiga;
 
 
 
-public interface BotiguesDAO extends JpaRepository<Botiga, Integer> {
+public interface BotiguesDAO extends JpaRepository<Botiga, Long> {
+	
+	@Query("select new Botiga(id , name, capacity) from Botiga")
+	public List<Botiga> getAllStoresNameAndCapacity();
+	
 	
 	//List <Botiga> findById (int id);
-	List <Botiga> findByNameContaining(String name);
+	//List <Botiga> findByNameContaining(String name);
+	
+	
 	
 	//public List<Botiga> getBotiga();
 	
