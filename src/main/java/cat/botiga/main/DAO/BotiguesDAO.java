@@ -14,22 +14,5 @@ public interface BotiguesDAO extends JpaRepository<Botiga, Long> {
 	public List<Botiga> getAllStoresNameAndCapacity();
 	
 	
-	List <Botiga> findById (int id);
-	
-	
-	//List <Botiga> findByNameContaining(String name);
-	
-		
-	//public List<Botiga> getBotiga();
-	
-	//public Botiga getBotigaById (int id);
-	
-	//public Optional<Botiga> findById(int id);
-	
-	//public void salvaBotiga (Botiga botiga);
-	
-	//public void modificaBotiga (Botiga botiga);
-	
-	//public void borraBotigaPerId (int id);
 
 }

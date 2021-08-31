@@ -56,16 +56,17 @@ public class ControllerRest {
 	// Falla
 	
 	@PostMapping("/shops/{id}/pictures")
-	public Quadre addPicture(@PathVariable(name = "id") Long id, @RequestBody Quadre quadre) {
-		//Botiga botiga = storeServiceImpl.storeById(id);
-		Quadre botiga = storeServiceImpl.addFrame(id, quadre);
+	public List <Quadre> addPicture(@PathVariable(name = "id") Long id, @RequestBody Quadre quadre) {
+		Botiga botiga = storeServiceImpl.storeById(id);
 		quadre.setData(LocalDateTime.now());
-		//botiguesDAO.getAllStoresNameAndCapacity();
+		botiga.addQuadre(quadre);
+		quadre.setBotiga(botiga);
 		
-		//botiga.addQuadre(quadre);
-		//storeServiceImpl.updateStore(botiga);
-		//botiga = storeServiceImpl.storeById(id);
-		return botiga;
+		botiguesDAO.getAllStoresNameAndCapacity();
+		storeServiceImpl.updateStore(botiga);
+		botiga = storeServiceImpl.storeById(id);
+						
+		return null; //botiga.getQuadres(id);
 	}
 
 	@DeleteMapping("/shops/{id}/pictures")
