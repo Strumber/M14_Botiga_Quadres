@@ -15,5 +15,6 @@ public interface StoreService {
 	
 	public void updateStore(Botiga botiga);
 	
-	//public void borrar(Long id);
+	//public long mostrarQuadres (botiga_id);
+	
 }

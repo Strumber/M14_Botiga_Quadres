@@ -33,30 +33,24 @@ public class StoreServiceImpl implements StoreService {
 		//TO-DO create relationship between Frame and Store tables
 		return quadresDAO.save(quadre);
 	}
-
+	@Override
 	public Botiga storeById(Long id) {
-		return botiguesDAO.findById(id).get();
+		return  botiguesDAO.getById(id);
 	}
-	
+	@Override
 	public void updateStore(Botiga botiga){
 		botiguesDAO.save(botiga);
 	}
-	
-	//no Funciona
-	public void borrar(Long id) {
-		List<Quadre> it = quadresDAO.findAll();
-
-		for (Quadre li:it) {
-			
-			if (li.getId().equals(id)) {
-				
-				it.clear();
-			}
-			
-			
-		}
+	public long mostrarQuadres (Long botiga_id) {
 		
+		return quadresDAO.getQuadresByBotiga_Id(botiga_id);
 	}
+
+	/*public Botiga storeById(Iterable<Long> botiga_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
+	
 
 	
 }

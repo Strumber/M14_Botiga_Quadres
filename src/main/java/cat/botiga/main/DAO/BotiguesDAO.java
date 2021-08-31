@@ -14,11 +14,12 @@ public interface BotiguesDAO extends JpaRepository<Botiga, Long> {
 	public List<Botiga> getAllStoresNameAndCapacity();
 	
 	
-	//List <Botiga> findById (int id);
+	List <Botiga> findById (int id);
+	
+	
 	//List <Botiga> findByNameContaining(String name);
 	
-	
-	
+		
 	//public List<Botiga> getBotiga();
 	
 	//public Botiga getBotigaById (int id);

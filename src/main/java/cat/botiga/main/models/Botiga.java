@@ -1,18 +1,17 @@
 package cat.botiga.main.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "botiga")
@@ -30,11 +29,9 @@ public class Botiga {
 	private int capacity;
 	
 	
-	/*@OneToMany(fetch=FetchType.LAZY,  cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH })
-	@JoinColumn(name="botiga_id")*/
+	
 	@OneToMany(mappedBy = "botiga", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List <Quadre> quadres;
+	private List<Quadre> quadres;
 
 	// Constructors per defecte
 	public Botiga() {
@@ -42,85 +39,55 @@ public class Botiga {
 
 	// Constructor amb parametres sense id que es autonumèric
 
-	public Botiga(Long id,String name, int capacity) {
-		this.id=id;
+	public Botiga(Long id, String name, int capacity) {
+		this.id = id;
 		this.name = name;
 		this.capacity = capacity;
 	}
-	
+
 	// Getters & Setters
-		public Long getId() {
-			return id;
-		}
+	public Long getId() {
+		return id;
+	}
 
-		public void setId(Long id) {
-			this.id = id;
-		}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-		public String getName() {
-			return name;
-		}
+	public String getName() {
+		return name;
+	}
 
-		public void setName(String name) {
-			this.name = name;
-		}
+	public void setName(String name) {
+		this.name = name;
+	}
 
-		public int getCapacity() {
-			return capacity;
-		}
+	public int getCapacity() {
+		return capacity;
+	}
 
-		public void setCapacity(int capacity) {
-			this.capacity = capacity;
-		}
-		
-		
-		public List<Quadre> getQuadres() {
-			return this.quadres;
-			
-			
-		}
-		
-		public void addQuadre (Quadre quadre) {
-			
-			this.quadres.add(quadre);
-		}
-		
-		public void eliminaQuadres (Long botiga_id) {
-			//this.quadres.clear();
-			this.quadres.clear();
-		}
-		 /*@OneToMany(mappedBy = "botiga",cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-		 private List<Quadre> quadres;
-		 
-		 //Per poder afegir quadres
-		 
-		 public void afegirQuadre (Quadre elQuadre) {
-			 
-			 if (quadres == null) quadres = new ArrayList<>();
-			 
-			 quadres.add(elQuadre);
-			 
-			 elQuadre.setBotiga(this);
-		 }
-		 
-		 //Get and Set
-		 public List<Quadre> getQuadres() {
-				return quadres;
-			}
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
 
-			public void setQuadres(List<Quadre> quadres) {
-				this.quadres = quadres;
-			}*/
-		 
+	public List<Quadre> getQuadres() {
+		return this.quadres;
 
-	
+	}
+
+	public void addQuadre(Quadre quadre) {
+
+		this.quadres.add(quadre);
+	}
+
+	public void eliminaQuadres(Long botiga_id) {
+		// this.quadres.clear();
+		this.quadres.clear();
+	}
+
 	@Override
 	public String toString() {
 		return "Botiga [id=" + id + ", name=" + name + ", capacity=" + capacity + "]";
 	}
 
-	
-
-	
-	
 }
