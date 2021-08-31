@@ -33,6 +33,23 @@ public class Quadre {
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "Botiga_id")
 	private Botiga botiga;*/
+	
+	@ManyToOne
+	private Botiga botiga;
+	
+	
+	//Getter Setter Botiga
+	public Botiga getBotiga() {
+		return botiga;
+	}
+
+
+
+	public void setBotiga(Botiga botiga) {
+		this.botiga = botiga;
+	}
+
+
 
 	// Constructor per defecte
 	public Quadre() {

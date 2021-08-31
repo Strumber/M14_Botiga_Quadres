@@ -29,10 +29,11 @@ public class Botiga {
 	@Column(name = "capacity")
 	private int capacity;
 	
-	//@OneToMany(cascade = CascadeType.ALL)
-	@OneToMany(fetch=FetchType.LAZY,  cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+	
+	/*@OneToMany(fetch=FetchType.LAZY,  cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
 			CascadeType.REFRESH })
-	@JoinColumn(name="botiga_id")
+	@JoinColumn(name="botiga_id")*/
+	@OneToMany(mappedBy = "botiga", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List <Quadre> quadres;
 
 	// Constructors per defecte

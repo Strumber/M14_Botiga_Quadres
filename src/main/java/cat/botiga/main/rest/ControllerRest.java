@@ -11,6 +11,7 @@ import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,9 @@ public class ControllerRest {
 
 	@Autowired
 	StoreServiceImpl storeServiceImpl;
+	
+	@Autowired
+	QuadresDAO quadresDAO;
 	
 	@GetMapping("/shops")
 	public List<Botiga> listAllStores() {
@@ -60,22 +64,47 @@ public class ControllerRest {
 		return store.getQuadres();
 	}
 	
-	@DeleteMapping("/shops/{id}/pictures")
-	
-	
-	/*public ResponseEntity<Void> deleteProducto(@PathVariable("botiga_id") Long botiga_id){
-		Quadre store = storeServiceImpl.borraQuadresBotiga(botiga_id);
-		return ResponseEntity.ok(null);
-	}*/
-	
-	 public Botiga purgeShopPictures(@PathVariable(name="id") Long botiga_id) {
+	/*@DeleteMapping("/shops/{id}/pictures")
+	public Botiga purgeShopPictures(@PathVariable(name="id") Long botiga_id) {
 		Botiga botiga = storeServiceImpl.storeById(botiga_id);
 		//botiga.borrar(botiga_id);
 		botiga.eliminaQuadres(botiga_id);
 		//storeServiceImpl.borrar(botiga_id);
 		storeServiceImpl.updateStore(botiga);
 		return storeServiceImpl.storeById(botiga_id);
+	}*/
+	
+	@DeleteMapping("/shops/{id}/pictures")
+	@Transactional
+	public Botiga purgeShopPictures(@PathVariable(name="id") Long botiga_id) {
+		quadresDAO.deleteByBotiga_id(botiga_id);
+		//storeServiceImpl.borrar(botiga_id)
+		
+		return storeServiceImpl.storeById(botiga_id);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*public ResponseEntity<Void> deleteProducto(@PathVariable("botiga_id") Long botiga_id){
+		Quadre store = storeServiceImpl.borraQuadresBotiga(botiga_id);
+		return ResponseEntity.ok(null);
+	}*/
+
+	/*@DeleteMapping(value="/shops/{id}/pictures")		//productos/{productId} (DELETE)
+	public ResponseEntity<Void> deleteProducto(@PathVariable("/shops/{id}/pictures") Long botiga_id){
+		
+		storeServiceImpl.borrar(botiga_id);
+		//QuadresDAO.deleteById(botiga_id);
+		return ResponseEntity.ok(null);
+	}*/
 	
 	/*@GetMapping("/pictures")
 	
