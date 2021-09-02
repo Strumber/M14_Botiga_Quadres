@@ -3,6 +3,7 @@ package cat.botiga.main.rest;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,7 @@ public class ControllerRest {
 	BotiguesDAO botiguesDAO;
 
 	// LListar Botigues (get)
+	
 	@GetMapping("/shops")
 	public List<Botiga> listAllStores() {
 		return storeServiceImpl.getAllStores();
@@ -53,8 +55,7 @@ public class ControllerRest {
 		return store.getQuadres();
 	}
 	
-	// Falla
-	
+		
 	@PostMapping("/shops/{id}/pictures")
 	public List <Quadre> addPicture(@PathVariable(name = "id") Long id, @RequestBody Quadre quadre) {
 		Botiga botiga = storeServiceImpl.storeById(id);
