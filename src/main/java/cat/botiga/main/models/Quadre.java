@@ -15,7 +15,7 @@ public class Quadre {
 	@Id
 	// @Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 
 	@Column(name = "autor", nullable = false, length = 30)
 	private String autor;
@@ -24,22 +24,23 @@ public class Quadre {
 	private String titol;
 
 	@Column(name = "preu")
-	private Double preu;
+	private double preu;
 
 	@Column(name = "data")
 	private LocalDateTime data;
 
-	@JsonIgnore
-	@ManyToOne
-	private Botiga botiga;
+	//@JsonIgnore
+	//@ManyToOne
+	@Column(name = "botiga_id")
+	private int botigaId;
 
 	// Getter Setter Botiga
-	public Botiga getBotiga() {
-		return botiga;
+	public int getBotigaId() {
+		return botigaId;
 	}
 
-	public void setBotiga(Botiga botiga) {
-		this.botiga = botiga;
+	public void setBotigaId(int botigaId) {
+		this.botigaId = botigaId;
 	}
 
 	// Constructor per defecte

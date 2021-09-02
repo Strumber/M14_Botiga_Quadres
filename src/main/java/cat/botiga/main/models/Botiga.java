@@ -20,7 +20,7 @@ public class Botiga {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Genera camps clau
 	@Column(name = "id")
-	private Long id;
+	private long id;
 
 	@Column(name = "name", nullable = false, length = 30)
 	private String name;
@@ -30,8 +30,7 @@ public class Botiga {
 	
 	
 	
-	@OneToMany(mappedBy = "botiga", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Quadre> quadres;
+	
 
 	// Constructors per defecte
 	public Botiga() {
@@ -69,25 +68,30 @@ public class Botiga {
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
-
-	public List<Quadre> getQuadres() {
-		return this.quadres;
-
-	}
-
-	public void addQuadre(Quadre quadre) {
-
-		this.quadres.add(quadre);
-	}
-
-	public void eliminaQuadres(Long botiga_id) {
-		// this.quadres.clear();
-		this.quadres.clear();
-	}
-
+	
 	@Override
 	public String toString() {
 		return "Botiga [id=" + id + ", name=" + name + ", capacity=" + capacity + "]";
 	}
+
+	//@OneToMany(mappedBy = "botiga", cascade = CascadeType.ALL, orphanRemoval = true)
+		//private List<Quadre> quadres;
+	
+	//public List<Quadre> getQuadres() {
+	//	return this.quadres;
+
+	//}
+
+	//public void addQuadre(Quadre quadre) {
+
+		//this.quadres.add(quadre);
+	//}
+
+	//public void eliminaQuadres(Long botiga_id) {
+		// this.quadres.clear();
+		//this.quadres.clear();
+	//}
+
+	
 
 }

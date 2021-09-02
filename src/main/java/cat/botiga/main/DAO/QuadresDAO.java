@@ -8,16 +8,11 @@ import cat.botiga.main.models.Quadre;
 
 
 @Repository
-public interface QuadresDAO extends JpaRepository<Quadre, Long> {
+public interface QuadresDAO extends JpaRepository<Quadre, Integer> {
 
-	long deleteByBotiga_id(Long id);
-	
-	
-	
-	long getQuadresByBotiga_Id (Long botiga_id);
-		
-	
-	public List<Quadre> findQuadreByBotiga_Id(int botiga_id);
+	void deleteByBotigaId(int id);	
+	//long getQuadresByBotiga_Id (Long botiga_id);
+	List<Quadre> findQuadreByBotigaId(int botiga_id);
 	
 	
 

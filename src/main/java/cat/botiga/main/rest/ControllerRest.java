@@ -3,7 +3,7 @@ package cat.botiga.main.rest;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,51 +32,54 @@ public class ControllerRest {
 	QuadresDAO quadresDAO;
 
 	@Autowired
-
 	BotiguesDAO botiguesDAO;
 
-	// LListar Botigues (get)
-	
+	// 2. LListar Botigues (get)
 	@GetMapping("/shops")
 	public List<Botiga> listAllStores() {
 		return storeServiceImpl.getAllStores();
 	}
 
-	// Crear botiga (post)
+	// 1. Crear botiga (post)
 	@PostMapping("/shops")
 	public Botiga addStore(@RequestBody Botiga botiga) {
 		return storeServiceImpl.addStore(botiga);
 	}
 
-	
+	//4) Llistar els quadres de la botiga (GET /shops/{ID}/pictures). 
 	@GetMapping("/shops/{id}/pictures")
-	public List<Quadre> getShopPictures(@PathVariable(name="id") Long id) {
-		Botiga store = storeServiceImpl.storeById(id);
-		return store.getQuadres();
+	public List<Quadre> getShopPictures(@PathVariable(name="id") Integer id) {
+		//Botiga store = storeServiceImpl.storeById(id);
+		return quadresDAO.findQuadreByBotigaId(id);
 	}
 	
-		
+	// 3. Afegir quadre: li donarem el nom del quadre i el del autor (POST /shops/{ID}/pictures) 
 	@PostMapping("/shops/{id}/pictures")
-	public List <Quadre> addPicture(@PathVariable(name = "id") Long id, @RequestBody Quadre quadre) {
-		Botiga botiga = storeServiceImpl.storeById(id);
+	public ResponseEntity<Quadre> addPicture( @PathVariable(name = "id") Integer id, 
+			                         @RequestBody Quadre quadre) {
+		//Botiga botiga = storeServiceImpl.storeById(id);		
+		//botiga.addQuadre(quadre);
+		//quadre.setBotiga(botiga);		
+		//botiguesDAO.getAllStoresNameAndCapacity();
+		//storeServiceImpl.updateStore(botiga);
+		//botiga = storeServiceImpl.storeById(id);
+		quadre.setBotigaId(id);
 		quadre.setData(LocalDateTime.now());
-		botiga.addQuadre(quadre);
-		quadre.setBotiga(botiga);
-		
-		botiguesDAO.getAllStoresNameAndCapacity();
-		storeServiceImpl.updateStore(botiga);
-		botiga = storeServiceImpl.storeById(id);
-						
-		return null; //botiga.getQuadres(id);
+		Quadre newProducto = quadresDAO.save(quadre);
+		return ResponseEntity.ok(newProducto); 
 	}
+				
 
 	@DeleteMapping("/shops/{id}/pictures")
 	@Transactional
-	public Botiga purgeShopPictures(@PathVariable(name = "id") Long botiga_id) {
-		quadresDAO.deleteByBotiga_id(botiga_id);
-		// storeServiceImpl.borrar(botiga_id)
-
-		return storeServiceImpl.storeById(botiga_id);
+	public void purgeShopPictures(@PathVariable(name = "id") Integer botiga_id) {
+		quadresDAO.deleteByBotigaId(botiga_id);
+		return;
 	}
 
+	
+	//public ResponseEntity<Void> deleteProductos(@PathVariable("shopid") Integer shopid) {
+	//	productosDAO.deleteAllByShopid(shopid);
+	//	return ResponseEntity.ok(null);
+	//}
 }

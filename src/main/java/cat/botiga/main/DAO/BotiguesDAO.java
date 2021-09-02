@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import cat.botiga.main.models.Botiga;
 
 @Repository
-public interface BotiguesDAO extends JpaRepository<Botiga, Long> {
+public interface BotiguesDAO extends JpaRepository<Botiga, Integer> {
 	
 	@Query("select new Botiga(id , name, capacity) from Botiga")
 	public List<Botiga> getAllStoresNameAndCapacity();

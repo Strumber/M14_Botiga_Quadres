@@ -11,7 +11,7 @@ public interface StoreService {
 	
 	public Quadre addFrame(Long id, Quadre quadre);
 	
-	public Botiga storeById(Long id);
+	public Botiga storeById(Integer id);
 	
 	public void updateStore(Botiga botiga);
 	

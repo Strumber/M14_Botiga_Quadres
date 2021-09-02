@@ -34,7 +34,7 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public Botiga storeById(Long id) {
+	public Botiga storeById(Integer id) {
 		return botiguesDAO.findById(id).get();
 	}
 
